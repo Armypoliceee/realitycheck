@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Check - ARMY Police</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #4a90e2;
+            text-align: center;
+        }
+        .reality-check-btn {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
+        }
+        .reality-check-btn:hover {
+            background-color: #357ab7;
+        }
+        .reality-message {
+            background-color: #ffeb3b;
+            padding: 15px;
+            border-radius: 10px;
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reality Check - ARMY Police</h1>
+    <button class="reality-check-btn" onclick="showRealityCheck()">Get Reality Check</button>
+
+    <div class="reality-message" id="realityMessage">
+        <p id="messageText"></p>
+    </div>
+
+    <script>
+        // List of 70 reality check messages
+        const realityChecks = [
+            "Touch some grass, ARMY! 🌿",
+            "Get outside and breathe fresh air! 🌬️",
+            "Not everything is about BTS... or is it? 🤔",
+            "The real world needs you, ARMY! 🌎",
+            "Even BTS takes breaks... You should too! 😌",
+            "You can't stream 'Winter Ahead' forever... or can you? 🤫",
+            "Take a deep breath and put down your phone for a sec! 📱💨",
+            "Are you grounded, ARMY? Time for a reality check! 🚶‍♂️",
+            "You don’t have to be delulu to be an ARMY... but it helps. 😜",
+            "The world isn’t all about fanfics... but it’s a start. ✍️",
+            "Real talk, ARMY: get some rest! 🛌",
+            "Sometimes, the best way to support Taehyung is to support yourself! 💜",
+            "Hey, ARMY! Time to touch some grass... really. 🌱",
+            "Delulu moments are fun, but life happens outside the fandom too! 🌳",
+            "Reality check: even the brightest stars need some chill time! 🌟",
+            "You’ve got this, ARMY! Now go out and get some sunshine! ☀️",
+            "There's more to life than Taehyung's latest tweet... or is there? 🤔",
+            "ARMY, you're awesome, but remember to take a step back sometimes! 🧠",
+            "Are you delulu or just passionate? Only you can decide! 😆",
+            "The grass outside is greener than your phone screen... try it! 🌿",
+            "Reality check: You deserve a break, just like Taehyung! 😌",
+            "Take a moment, breathe, and maybe go for a walk! 🚶‍♀️",
+            "Even ARMY needs to rest... especially from being delulu! 💤",
+            "Get some fresh air and come back refreshed to stream! 🎧",
+            "Take your delulu to the outdoors for a change! 🏞️",
+            "You’ve been watching Taehyung’s clips for hours, now step outside! ⏳🌳",
+            "Touch some grass and refresh your mind, ARMY! 🍃",
+            "BTS won’t mind if you take a little breather, promise. 💜",
+            "Delulu is fun, but balance it with some real-world moments! ⚖️",
+            "ARMY, don’t forget to recharge your own batteries! 🔋",
+            "Reality check: It’s okay to be obsessed, just don’t forget to live! 😉",
+            "Being an ARMY is amazing, but so is being a human! 🌟",
+            "Let your screen cool down while you go stretch! 📵🧘",
+            "Even your bias would tell you to eat something healthy today! 🥗",
+            "Taehyung isn't going anywhere. But your chores are waiting. 🧹",
+            "Shower time, ARMY. You've earned it. 🚿",
+            "This is your sign to blink, hydrate, and rest your eyes. 👀💧",
+            "If BTS saw your screen time, they’d raise an eyebrow. 📊😏",
+            "You're not gonna miss a comeback in the next 5 minutes. Go hydrate. 🧃",
+            "Jimin wants you to love yourself first. 💕",
+            "Hobi says: go outside and dance in the sunlight. 🌞🕺",
+            "Namjoon approves of long walks and deep thoughts. 🧠🚶‍♂️",
+            "Seokjin says: go eat something delicious right now. 🍜",
+            "Yoongi would 100% be napping right now. Take notes. 😴",
+            "Jungkook wants you to hit the gym. Or at least stretch. 🏋️‍♀️",
+            "Your playlist can wait. Your health can't. ❤️",
+            "Delulu is temporary. Your body is forever. Take care! 💪",
+            "You're not missing a Bangtan live. It's just Twitter loops. 🔁",
+            "ARMY, you are loved. Now go love yourself back. 💜",
+            "Rewatching fancams for the 40th time? Maybe pause. 🖥️✋",
+            "Your bias wants you to be your best self today. ✨",
+            "Go pet a dog or hug a pillow—something real! 🐶🛏️",
+            "Offline ARMYs exist and are thriving. Try it. 😎",
+            "Twitter isn’t the only place BTS love lives. 💌",
+            "Let the notifications be. Live a little! 🔕🎈",
+            "Real life also has plot twists, just like fanfics. 📖😆",
+            "You don’t need to scroll all night to feel connected. 💤📵",
+            "Put your phone down and look up at the stars. BTS loves the sky too. 🌌",
+            "Even the Magic Shop closes sometimes. 🌠",
+            "Would your bias approve of your sleep schedule? 😳",
+            "This is your official ARMY Police reminder: self-care first. 🚨💆‍♀️",
+            "Life’s a mixtape. Don’t skip your own tracks. 🎶💫",
+            "Catch your breath, touch some leaves, then come back stronger. 🍂",
+            "It’s okay to log off and live loud. BTS would agree. 📴🎤",
+            "Stream goals are great, but so is mental peace. 🧘‍♀️",
+            "You’re not losing your ARMY badge if you rest a bit. 🪪💤",
+            "You’re doing amazing. Now go hydrate and move! 💧🕺",
+            "ARMY, this is your cue to take a reality walk. 🚶🌤️"
+        ];
+
+        function showRealityCheck() {
+            const randomMessage = realityChecks[Math.floor(Math.random() * realityChecks.length)];
+            document.getElementById("messageText").innerText = randomMessage;
+            var messageDiv = document.getElementById("realityMessage");
+            messageDiv.style.display = messageDiv.style.display === "none" || messageDiv.style.display === "" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
